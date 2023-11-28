@@ -24,7 +24,7 @@ struct AaDS_1App: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView(FBStorage: FirebaseStorage())
+            KeyCheckView()
         }
     }
 }

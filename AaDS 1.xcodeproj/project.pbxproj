@@ -13,14 +13,14 @@
 		F50FE37D2AF7FC79006BF596 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F50FE37C2AF7FC79006BF596 /* Preview Assets.xcassets */; };
 		F50FE3872AF82386006BF596 /* KeyCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50FE3862AF82386006BF596 /* KeyCreateView.swift */; };
 		F50FE38A2AF82893006BF596 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50FE3892AF82893006BF596 /* HomeView.swift */; };
-		F52134312AFB058E00F45A6B /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52134302AFB058E00F45A6B /* FirebaseStorage.swift */; };
+		F52134312AFB058E00F45A6B /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52134302AFB058E00F45A6B /* CloudStorage.swift */; };
 		F52134402AFBE21700F45A6B /* AddPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521343F2AFBE21700F45A6B /* AddPictureView.swift */; };
+		F52C861F2B0FCD76000022F3 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52C861E2B0FCD76000022F3 /* UIImageExtension.swift */; };
 		F54B07EA2AF831BE003E4A14 /* ErrorMessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54B07E92AF831BE003E4A14 /* ErrorMessageTextView.swift */; };
 		F54B07EC2AF97F47003E4A14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F54B07EB2AF97F47003E4A14 /* GoogleService-Info.plist */; };
 		F54B08212AF98063003E4A14 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F54B08202AF98063003E4A14 /* FirebaseStorage */; };
-		F54B08252AFA9C2A003E4A14 /* KeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54B08242AFA9C2A003E4A14 /* KeyViewModel.swift */; };
-		F54B08282AFA9E65003E4A14 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F54B08272AFA9E65003E4A14 /* CryptoSwift */; };
-		F54B082B2AFAA72D003E4A14 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = F54B082A2AFAA72D003E4A14 /* KeychainAccess */; };
+		F54B08252AFA9C2A003E4A14 /* KeychainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54B08242AFA9C2A003E4A14 /* KeychainViewModel.swift */; };
+		F55711112B156D7D00E17004 /* AddPictureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55711102B156D7D00E17004 /* AddPictureViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,11 +31,13 @@
 		F50FE37C2AF7FC79006BF596 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F50FE3862AF82386006BF596 /* KeyCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCreateView.swift; sourceTree = "<group>"; };
 		F50FE3892AF82893006BF596 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		F52134302AFB058E00F45A6B /* FirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
+		F52134302AFB058E00F45A6B /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		F521343F2AFBE21700F45A6B /* AddPictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPictureView.swift; sourceTree = "<group>"; };
+		F52C861E2B0FCD76000022F3 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		F54B07E92AF831BE003E4A14 /* ErrorMessageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageTextView.swift; sourceTree = "<group>"; };
 		F54B07EB2AF97F47003E4A14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		F54B08242AFA9C2A003E4A14 /* KeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyViewModel.swift; sourceTree = "<group>"; };
+		F54B08242AFA9C2A003E4A14 /* KeychainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainViewModel.swift; sourceTree = "<group>"; };
+		F55711102B156D7D00E17004 /* AddPictureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPictureViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,8 +46,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F54B08212AF98063003E4A14 /* FirebaseStorage in Frameworks */,
-				F54B08282AFA9E65003E4A14 /* CryptoSwift in Frameworks */,
-				F54B082B2AFAA72D003E4A14 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,21 +92,11 @@
 			isa = PBXGroup;
 			children = (
 				F50FE3892AF82893006BF596 /* HomeView.swift */,
-				F50FE3772AF7FC78006BF596 /* KeyCheckView.swift */,
-				F50FE3852AF82312006BF596 /* KeyCreate */,
+				F5CC1D9F2B15619A007F800A /* Auth */,
+				F557110F2B156D6100E17004 /* AddPicture */,
 				F54B07E92AF831BE003E4A14 /* ErrorMessageTextView.swift */,
-				F521343F2AFBE21700F45A6B /* AddPictureView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		F50FE3852AF82312006BF596 /* KeyCreate */ = {
-			isa = PBXGroup;
-			children = (
-				F50FE3862AF82386006BF596 /* KeyCreateView.swift */,
-				F54B08242AFA9C2A003E4A14 /* KeyViewModel.swift */,
-			);
-			path = KeyCreate;
 			sourceTree = "<group>";
 		};
 		F52134292AFB035900F45A6B /* API */ = {
@@ -154,7 +144,7 @@
 		F521342E2AFB04D400F45A6B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				F52134302AFB058E00F45A6B /* FirebaseStorage.swift */,
+				F52134302AFB058E00F45A6B /* CloudStorage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -162,8 +152,28 @@
 		F52134342AFB072400F45A6B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F52C861E2B0FCD76000022F3 /* UIImageExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F557110F2B156D6100E17004 /* AddPicture */ = {
+			isa = PBXGroup;
+			children = (
+				F521343F2AFBE21700F45A6B /* AddPictureView.swift */,
+				F55711102B156D7D00E17004 /* AddPictureViewModel.swift */,
+			);
+			path = AddPicture;
+			sourceTree = "<group>";
+		};
+		F5CC1D9F2B15619A007F800A /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				F50FE3772AF7FC78006BF596 /* KeyCheckView.swift */,
+				F50FE3862AF82386006BF596 /* KeyCreateView.swift */,
+				F54B08242AFA9C2A003E4A14 /* KeychainViewModel.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,8 +194,6 @@
 			name = "AaDS 1";
 			packageProductDependencies = (
 				F54B08202AF98063003E4A14 /* FirebaseStorage */,
-				F54B08272AFA9E65003E4A14 /* CryptoSwift */,
-				F54B082A2AFAA72D003E4A14 /* KeychainAccess */,
 			);
 			productName = "AaDS 1";
 			productReference = F50FE3722AF7FC78006BF596 /* AaDS 1.app */;
@@ -217,8 +225,6 @@
 			mainGroup = F50FE3692AF7FC78006BF596;
 			packageReferences = (
 				F54B07ED2AF98063003E4A14 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				F54B08262AFA9E65003E4A14 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
-				F54B08292AFAA72C003E4A14 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = F50FE3732AF7FC78006BF596 /* Products */;
 			projectDirPath = "";
@@ -250,10 +256,12 @@
 				F54B07EA2AF831BE003E4A14 /* ErrorMessageTextView.swift in Sources */,
 				F52134402AFBE21700F45A6B /* AddPictureView.swift in Sources */,
 				F50FE3782AF7FC78006BF596 /* KeyCheckView.swift in Sources */,
-				F52134312AFB058E00F45A6B /* FirebaseStorage.swift in Sources */,
+				F55711112B156D7D00E17004 /* AddPictureViewModel.swift in Sources */,
+				F52C861F2B0FCD76000022F3 /* UIImageExtension.swift in Sources */,
+				F52134312AFB058E00F45A6B /* CloudStorage.swift in Sources */,
 				F50FE38A2AF82893006BF596 /* HomeView.swift in Sources */,
 				F50FE3872AF82386006BF596 /* KeyCreateView.swift in Sources */,
-				F54B08252AFA9C2A003E4A14 /* KeyViewModel.swift in Sources */,
+				F54B08252AFA9C2A003E4A14 /* KeychainViewModel.swift in Sources */,
 				F50FE3762AF7FC78006BF596 /* AaDS_1App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,22 +486,6 @@
 				minimumVersion = 10.17.0;
 			};
 		};
-		F54B08262AFA9E65003E4A14 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.8.0;
-			};
-		};
-		F54B08292AFAA72C003E4A14 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -501,16 +493,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F54B07ED2AF98063003E4A14 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
-		};
-		F54B08272AFA9E65003E4A14 /* CryptoSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F54B08262AFA9E65003E4A14 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
-			productName = CryptoSwift;
-		};
-		F54B082A2AFAA72D003E4A14 /* KeychainAccess */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F54B08292AFAA72C003E4A14 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
-			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

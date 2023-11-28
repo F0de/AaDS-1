@@ -1,22 +1,21 @@
 //
-//  Firebase Storage.swift
+//  CloudStorage.swift
 //  AaDS 1
 //
 //  Created by Влад Тимчук on 08.11.2023.
 //
 
-import Foundation
 import Firebase
 import FirebaseStorage
 import UIKit
 import Dispatch
 
-final class FirebaseStorage: ObservableObject {
+class CloudStorage: ObservableObject {
     @Published var picturesDic = [String : UIImage]()
 
     let storageRef = Storage.storage().reference()
     
-    //MARK: Uploading picture file from iPhone file system to Firebase Storage and picturesDic
+    //MARK: Uploading picture file from iPhone file system to Firebase Storage and adding picture UIImage to picturesDic
     func uploadPicture(picURL: URL) -> Bool {
         var isError = false
 
@@ -44,51 +43,47 @@ final class FirebaseStorage: ObservableObject {
             // convert Data to UIImage
             if let uiImage = UIImage(data: data) {
                 // add UIImage to picturesDic
-//                DispatchQueue.main.async { [weak self] in
-//                    guard let strongSelf = self else { return }
-                    picturesDic[picURL.lastPathComponent] = uiImage
-                    print("picture (\(picURL.lastPathComponent)) append to array")
-                    print("picturesDic: \(picturesDic)")
-//                }
+                picturesDic[picURL.lastPathComponent] = uiImage
+                print("picture (\(picURL.lastPathComponent)) append to picturesDic")
+                print("picturesDic: \(picturesDic)")
             }
             print("Successfully read file data: \(data)")
         } catch {
             print("Error reading file \(error)")
         }
-//        URLSession.shared.dataTask(with: picURL) { data, _, error in
-//            guard let data = data, error == nil else {
-//                print("Data error \(error)")
-//                return
-//            }
-//            
-//            // download picture data from FB Storage
-//            concurrentQueue.async {
-//                self.storageRef.child("pictures").child(picURL.lastPathComponent).putData(data) { result in
-//                    switch result {
-//                    case .success:
-//                        print("[FB Storage] File load to FB successfully")
-//                    case .failure(let error):
-//                        print("[FB Storage] Error loading file to FB: \(error.localizedDescription)")
-//                        isError = true
-//                    }
-//                }
-//            }
-//            
-//            // convert Data to UIImage
-//            if let image = UIImage(data: data) {
-//                // add UIImage to picturesDic
-//                DispatchQueue.main.sync { [weak self] in
-//                    guard let strongSelf = self else { return }
-//                    strongSelf.picturesDic[picURL.lastPathComponent] = image
-//                    print("picture (\(picURL.lastPathComponent)) append to array")
-//                    print("3.picturesDic: \(strongSelf.picturesDic)")
-//                }
-//            }
-//        }.resume()
         
         picURL.stopAccessingSecurityScopedResource()
         
         return isError
+    }
+    
+    //MARK: Uploading picture file from iPhone file system to Firebase Storage and adding picture UIImage to picturesDic
+    func uploadPicture(image: UIImage, imageName: String) {
+        let concurrentQueue = DispatchQueue(label: "uploadPicture.concurrent-queue", qos: .utility, attributes: .concurrent)
+        
+        // convert URL to Data
+        if let data = try image.pngData() {
+            
+            // upload picture data to FB Storage
+            concurrentQueue.async {
+                self.storageRef.child("pictures").child(imageName).putData(data) { result in
+                    switch result {
+                    case .success:
+                        print("[FB Storage] File load to FB successfully")
+                    case .failure(let error):
+                        print("[FB Storage] Error loading file to FB: \(error.localizedDescription)")
+                    }
+                }
+            }
+            
+            // add UIImage to picturesDic
+            picturesDic[imageName] = image
+            print("picture (\(imageName)) replayced in picturesDic")
+            print("picturesDic: \(picturesDic)")
+            
+            print("Successfully read file data: \(data)")
+        }
+        
     }
     
     //MARK: Deleting picture from Firebase Storage and picturesDic

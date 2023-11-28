@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct KeyCreateView: View {
+    var keychainVM = KeychainViewModel()
+    
+    @State private var userName = ""
     @State private var pass = ""
     @State private var repeatPass = ""
+    private var userErrorMessage = ""
     private var passErrorMessage = ""
     private var repeatPassErrorMessage = ""
         
@@ -18,11 +22,13 @@ struct KeyCreateView: View {
     var body: some View {
         NavigationView {
             VStack {
+                TextField("User name", text: $userName)
+                ErrorMessageTextView(message: userErrorMessage)
                 SecureField("Key", text: $pass)
                 ErrorMessageTextView(message: passErrorMessage)
                 SecureField("Repeat key", text: $repeatPass)
                 ErrorMessageTextView(message: repeatPassErrorMessage)
-                CreateKeyButton(pass: $repeatPass)
+                CreateKeyButton(pass: $repeatPass, user: $userName)
             }
             .padding()
             .toolbar {
@@ -40,14 +46,15 @@ struct KeyCreateView: View {
 }
 
 struct CreateKeyButton: View {
-//    @ObservedObject var vm = KeyViewModel()
+    var keychainVM = KeychainViewModel()
     
     @Binding var pass: String
+    @Binding var user: String
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
         Button {
-            
+            keychainVM.savePass(for: user, password: pass)
             dismiss()
         } label: {
             Text("Create Key")

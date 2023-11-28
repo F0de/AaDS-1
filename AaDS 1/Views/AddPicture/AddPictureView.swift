@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct AddPictureView: View {
-    @ObservedObject var FBStorage: FirebaseStorage
-
+    @EnvironmentObject var storage: CloudStorage
+    @EnvironmentObject var AddPictureVM: AddPictureViewModel
+    
     @State private var fileURL: URL?
     @State private var fileName: String?
     @State private var image: UIImage?
@@ -46,7 +48,7 @@ struct AddPictureView: View {
                 Button {
                     if let fileURL = fileURL {
                         print("Selected file to uploading: \(fileURL.lastPathComponent)")
-                        showingAlert = FBStorage.uploadPicture(picURL: fileURL)
+                        showingAlert = storage.uploadPicture(picURL: fileURL)
                     } else {
                         showingAlert.toggle()
                     }
@@ -71,12 +73,12 @@ struct AddPictureView: View {
                     })
                 }
             }
-            .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.png]) { result in
+            .fileImporter(isPresented: $showFileImporter, allowedContentTypes: AddPictureVM.types) { result in
                 switch result {
                 case .success(let url):
                     print("[fileImporter] File loaded. URL: \(url)")
                     fileURL = url
-                    image = FBStorage.previewFile(picURL: url)
+                    image = storage.previewFile(picURL: url)
                     fileName = url.lastPathComponent
                 case .failure(let error):
                     print("[fileImporter] Error while selecting a file. Error: \(error.localizedDescription)")
