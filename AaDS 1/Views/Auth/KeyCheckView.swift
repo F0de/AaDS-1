@@ -18,23 +18,33 @@ struct KeyCheckView: View {
 
     @State private var isShowingKeyCreateSheet = false
     @State private var isShowingHomeView = false
-
+    @FocusState var isFocus: Bool
+    
     var body: some View {
         NavigationView {
-            VStack {
-                Spacer()
-                TextField("User name", text: $userName)
-                ErrorMessageTextView(message: userErrorMessage)
-                SecureField("Key", text: $key)
-                ErrorMessageTextView(message: keyErrorMessage)
-                KeyCheckButton(pass: $key, user: $userName)
-                    .padding(.bottom, 5)
-                KeyCreateButton(isShowingKeyCreateSheet: $isShowingKeyCreateSheet)
-                Spacer()
-                TryDemoButton()
-            }
-            .padding()
-            .sheet(isPresented: $isShowingKeyCreateSheet) { KeyCreateView() }
+            ZStack {
+                Rectangle().fill(.background)
+                VStack {
+                    Spacer()
+                    TextField("User name", text: $userName)
+                        .focused($isFocus)
+                    ErrorMessageTextView(message: userErrorMessage)
+                    SecureField("Key", text: $key)
+                        .focused($isFocus)
+                    ErrorMessageTextView(message: keyErrorMessage)
+                    KeyCheckButton(pass: $key, user: $userName)
+                        .padding(.bottom, 5)
+                    KeyCreateButton(isShowingKeyCreateSheet: $isShowingKeyCreateSheet)
+                    Spacer()
+                    NavigationLink(destination: HomeView()) {
+                        TryDemoButton()
+                    }.onTapGesture(perform: {
+                        AddPictureVM.types = [.png]
+                    })
+                }
+                .padding()
+                .sheet(isPresented: $isShowingKeyCreateSheet) { KeyCreateView() }
+            }.onTapGesture { isFocus = false }
         }
         .environmentObject(AddPictureVM)
     }
@@ -46,16 +56,24 @@ struct KeyCheckButton: View {
 
     @Binding var pass: String
     @Binding var user: String
-    
+
+    @State private var shouldNavigate = false
+
     var body: some View {
-        Button {
-            AddPictureVM.types = keychainVM.checkPass(for: user, password: pass)
-        } label: {
-            Text("Check Key")
-                .frame(maxWidth: .infinity)
-                .frame(height: 30)
+        VStack {
+            Button {
+                (shouldNavigate, AddPictureVM.types) = keychainVM.checkPass(for: user, password: pass)
+            } label: {
+                Text("Check Key")
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 30)
+            }
+            .buttonStyle(.borderedProminent)
+            
+            NavigationLink(destination: HomeView(), isActive: $shouldNavigate) {
+                EmptyView()
+            }.hidden()
         }
-        .buttonStyle(.borderedProminent)
     }
 }
 
@@ -73,18 +91,10 @@ struct KeyCreateButton: View {
 }
 
 struct TryDemoButton: View {
-    @EnvironmentObject var AddPictureVM: AddPictureViewModel
-
     var body: some View {
-        NavigationLink {
-            HomeView()
-        } label: {
-            Text("Try demo version")
-                .frame(height: 30)
-                .font(.title3)
-        }
-        .buttonStyle(.borderedProminent)
-        .tint(.gray)
+        Text("Try demo version")
+            .frame(height: 30)
+            .font(.title3)
     }
 }
 

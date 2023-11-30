@@ -18,28 +18,37 @@ struct KeyCreateView: View {
     private var repeatPassErrorMessage = ""
         
     @Environment(\.dismiss) var dismiss
-    
+    @FocusState var isFocus: Bool
+
     var body: some View {
         NavigationView {
-            VStack {
-                TextField("User name", text: $userName)
-                ErrorMessageTextView(message: userErrorMessage)
-                SecureField("Key", text: $pass)
-                ErrorMessageTextView(message: passErrorMessage)
-                SecureField("Repeat key", text: $repeatPass)
-                ErrorMessageTextView(message: repeatPassErrorMessage)
-                CreateKeyButton(pass: $repeatPass, user: $userName)
-            }
-            .padding()
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: { dismiss() }, label: {
-                        HStack {
-                            Image(systemName: "chevron.backward")
-                            Text("Back")
-                        }
-                    })
+            ZStack {
+                Rectangle().fill(.background)
+                VStack {
+                    TextField("User name", text: $userName)
+                        .focused($isFocus)
+                    ErrorMessageTextView(message: userErrorMessage)
+                    SecureField("Key", text: $pass)
+                        .focused($isFocus)
+                    ErrorMessageTextView(message: passErrorMessage)
+                    SecureField("Repeat key", text: $repeatPass)
+                        .focused($isFocus)
+                    ErrorMessageTextView(message: repeatPassErrorMessage)
+                    CreateKeyButton(pass: $repeatPass, user: $userName)
                 }
+                .padding()
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(action: { dismiss() }, label: {
+                            HStack {
+                                Image(systemName: "chevron.backward")
+                                Text("Back")
+                            }
+                        })
+                    }
+                }
+            }.onTapGesture {
+                isFocus = false
             }
         }
     }

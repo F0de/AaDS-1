@@ -12,7 +12,7 @@ import UniformTypeIdentifiers
 class KeychainViewModel {
     
     func savePass(for user: String, password: String) {
-        let passwordData = password.utf8
+        let passwordData = password.data(using: .utf8)
         
         let query: [String : Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -26,9 +26,10 @@ class KeychainViewModel {
         } else {
             print("Error saving password to Keychain")
         }
+        print("Operation finished with status: \(status)")
     }
     
-    func checkPass(for user: String, password: String) -> [UTType] {
+    func checkPass(for user: String, password: String) -> (Bool, [UTType]) {
         let passwordData = password.data(using: .utf8)
 
         let query: [String : Any] = [
@@ -45,7 +46,7 @@ class KeychainViewModel {
             if let retrievedData = dataTypeRef as? Data {
                 if passwordData == retrievedData {
                     print("Password matched! Unlocking premium features.")
-                    return [.png, .jpeg]
+                    return (true, [.png, .jpeg])
                 } else {
                     print("Incorrest password")
                 }
@@ -55,7 +56,7 @@ class KeychainViewModel {
         } else {
             print("Error retrieving password from Keychain")
         }
-        return [.png]
+        return (false, [.png])
     }
     
 }
